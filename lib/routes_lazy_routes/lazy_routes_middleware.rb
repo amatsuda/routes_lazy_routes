@@ -5,14 +5,17 @@ module RoutesLazyRoutes
     def initialize(app, original_routes_reloader)
       @app = app
       @original_routes_reloader = original_routes_reloader
+      @mutex = Mutex.new
       @loaded = false
     end
 
     def call(env)
       unless @loaded
-        @app.instance_variable_set :@routes_reloader, @original_routes_reloader
-        @original_routes_reloader.execute
-        @loaded = true
+        @mutex.synchronize do
+          @app.instance_variable_set :@routes_reloader, @original_routes_reloader
+          @original_routes_reloader.execute
+          @loaded = true
+        end
       end
 
       @app.call env
