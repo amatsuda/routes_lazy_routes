@@ -2,12 +2,18 @@
 
 require "test_helper"
 
-class RoutesLazyRoutesTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::RoutesLazyRoutes::VERSION
-  end
+class RoutesLazyRoutesTest < ActionDispatch::IntegrationTest
+  def test_it_lazily_loads_the_routes
+    assert_equal 0, Rails.application.routes.routes.length
 
-  def test_it_does_something_useful
-    assert false
+    get '/foo'
+    assert_response :success
+    assert_equal 'hello', body
+
+    assert_equal 1, Rails.application.routes.routes.length
+
+    get '/foo'
+    assert_response :success
+    assert_equal 'hello', body
   end
 end
