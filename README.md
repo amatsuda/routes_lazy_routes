@@ -1,8 +1,9 @@
-# RoutesLazyRoutes
+# routes_lazy_routes
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/routes_lazy_routes`. To experiment with that code, run `bin/console` for an interactive prompt.
+routes_lazy_routes is an evil Rails plugin that defers loading the whole bloody routes until the server gets the first request, so the app can spin up quickly. 🤘
 
-TODO: Delete this and the text above, and describe your gem
+This voodoo gem is designed especially for you who are maintaining a Rails app that contains hundreds of routes that forces to wait dozens of seconds per every `rails` command invocation.
+
 
 ## Installation
 
@@ -12,27 +13,30 @@ Add this line to your application's Gemfile:
 gem 'routes_lazy_routes'
 ```
 
-And then execute:
+If you're not brave enough, you can limit the group not to include `production` environment.
+Indeed, enabling this gem for the processes like batch or job may improve their runtime performance, but so far as that's not a critical problem for your production system, the following setup might be safer.
 
-    $ bundle install
+```ruby
+group :development, :test do
+  gem 'routes_lazy_routes'
+end
+```
 
-Or install it yourself as:
-
-    $ gem install routes_lazy_routes
 
 ## Usage
 
-TODO: Write usage instructions here
+You have nothing to do with it. It should just work beneath the skin.
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## Trade-off
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The first visitor of the server should sacrifice their time for the Rails process to load the routes.
+If you're bundling this in the production server, it'd be a good idea to throw a jab to the server right after the deployment in order to warm up before accepting real client requests.
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/amatsuda/routes_lazy_routes.
+Patches are welcome on GitHub at https://github.com/amatsuda/routes_lazy_routes.
 
 
 ## License
