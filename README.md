@@ -2,7 +2,7 @@
 
 routes_lazy_routes is an evil Rails plugin that defers loading the whole bloody routes until the server gets the first request, so the app can spin up quickly. 🤘
 
-This voodoo gem is designed especially for you who are maintaining a Rails app that contains hundreds of routes that forces to wait dozens of seconds per every `rails` command invocation.
+This voodoo gem is designed especially for you who are maintaining a Rails app that contains hundreds of routes that forces you to wait dozens of seconds per every `rails` command invocation.
 
 
 ## Installation
