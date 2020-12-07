@@ -34,6 +34,17 @@ The first visitor of the server should sacrifice their time for the Rails proces
 If you're bundling this in the production server, it'd be a good idea to throw a jab to the server right after the deployment in order to warm up before accepting real client requests.
 
 
+## Notes
+
+- You can manually eager_load the routes by calling `RoutesLazyRoutes.eager_load!` (the "load runner").
+
+- `Rails.application.eager_load!` automatically invokes `RoutesLazyRoutes.eager_load!` since that should be what we expect for `Rails.application.eager_load!`.
+
+- Loading an integration test automatically kicks `RoutesLazyRoutes.eager_load!` since AD::Integration expects the routes to be loaded.
+
+- And, as already explained, sending a request to the Rails server automatically runs `RoutesLazyRoutes.eager_load!` on the server.
+
+
 ## Contributing
 
 Patches are welcome on GitHub at https://github.com/amatsuda/routes_lazy_routes.
