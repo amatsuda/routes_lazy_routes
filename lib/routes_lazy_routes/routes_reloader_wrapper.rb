@@ -6,6 +6,7 @@ module RoutesLazyRoutes
 
     def initialize(original_routes_reloader)
       @original_routes_reloader = original_routes_reloader
+      @mutex = Mutex.new
     end
 
     def execute
@@ -13,8 +14,10 @@ module RoutesLazyRoutes
     end
 
     def reload!
-      Rails.application.instance_variable_set :@routes_reloader, @original_routes_reloader
-      @original_routes_reloader.execute
+      @mutex.synchronize do
+        Rails.application.instance_variable_set :@routes_reloader, @original_routes_reloader
+        @original_routes_reloader.execute
+      end
     end
   end
 end

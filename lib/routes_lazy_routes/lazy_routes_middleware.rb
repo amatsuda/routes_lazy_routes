@@ -4,16 +4,13 @@ module RoutesLazyRoutes
   class LazyRoutesMiddleware
     def initialize(app)
       @app = app
-      @mutex = Mutex.new
       @loaded = false
     end
 
     def call(env)
       unless @loaded
-        @mutex.synchronize do
-          RoutesLazyRoutes.eager_load!
-          @loaded = true
-        end
+        RoutesLazyRoutes.eager_load!
+        @loaded = true
       end
 
       @app.call env
