@@ -2,9 +2,8 @@
 
 module RoutesLazyRoutes
   class LazyRoutesMiddleware
-    def initialize(app, original_routes_reloader)
+    def initialize(app)
       @app = app
-      @original_routes_reloader = original_routes_reloader
       @mutex = Mutex.new
       @loaded = false
     end

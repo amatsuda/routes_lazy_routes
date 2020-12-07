@@ -7,7 +7,7 @@ module RoutesLazyRoutes
     def initialize(original_routes_reloader)
       @original_routes_reloader = original_routes_reloader
 
-      Rails.application.config.middleware.use LazyRoutesMiddleware, original_routes_reloader
+      Rails.application.config.middleware.use LazyRoutesMiddleware
     end
 
     def execute
