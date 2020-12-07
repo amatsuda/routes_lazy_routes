@@ -13,5 +13,10 @@ module RoutesLazyRoutes
     def execute
       # pretty vacant
     end
+
+    def reload!
+      Rails.application.instance_variable_set :@routes_reloader, @original_routes_reloader
+      @original_routes_reloader.execute
+    end
   end
 end
