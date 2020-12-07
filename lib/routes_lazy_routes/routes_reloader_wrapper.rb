@@ -15,8 +15,10 @@ module RoutesLazyRoutes
 
     def reload!
       @mutex.synchronize do
-        Rails.application.instance_variable_set :@routes_reloader, @original_routes_reloader
-        @original_routes_reloader.execute
+        if Rails.application.routes_reloader == self
+          Rails.application.instance_variable_set :@routes_reloader, @original_routes_reloader
+          @original_routes_reloader.execute
+        end
       end
     end
   end
