@@ -11,9 +11,7 @@ module RoutesLazyRoutes
     def call(env)
       unless @loaded
         @mutex.synchronize do
-          if RoutesLazyRoutes::RoutesReloaderWrapper === (reloader = Rails.application.routes_reloader)
-            reloader.reload!
-          end
+          RoutesLazyRoutes.load_original_routes!
           @loaded = true
         end
       end
