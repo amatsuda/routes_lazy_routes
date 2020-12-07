@@ -11,7 +11,7 @@ module RoutesLazyRoutes
     def call(env)
       unless @loaded
         @mutex.synchronize do
-          RoutesLazyRoutes.load_original_routes!
+          RoutesLazyRoutes.eager_load!
           @loaded = true
         end
       end

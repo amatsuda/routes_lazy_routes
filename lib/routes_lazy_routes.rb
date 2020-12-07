@@ -18,7 +18,8 @@ module RoutesLazyRoutes
       end
     end
 
-    def load_original_routes!
+    # The load runner
+    def eager_load!
       if RoutesLazyRoutes::RoutesReloaderWrapper === (reloader = Rails.application.routes_reloader)
         reloader.reload!
       end
