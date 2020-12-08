@@ -9,7 +9,7 @@ module RoutesLazyRoutes
 
       Rails.application.config.middleware.use LazyRoutesMiddleware
 
-      Rails.application.extend RoutesLazyRoutes::Application
+      Rails.application.extend RoutesLazyRoutes::Application::LoadRunner
 
       ActiveSupport.on_load :action_dispatch_integration_test, run_once: true do
         RoutesLazyRoutes.eager_load!

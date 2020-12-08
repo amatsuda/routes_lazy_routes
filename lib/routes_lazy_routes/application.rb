@@ -2,11 +2,13 @@
 
 module RoutesLazyRoutes
   module Application
-    # We expect `Rails.application.eager_load!` to load all routes as well
-    def eager_load!
-      RoutesLazyRoutes.eager_load!
+    module LoadRunner
+      # We expect `Rails.application.eager_load!` to load all routes as well
+      def eager_load!
+        RoutesLazyRoutes.eager_load!
 
-      super
+        super
+      end
     end
   end
 end
