@@ -4,15 +4,30 @@ on: [push,pull_request]
 
 jobs:
   build:
+    strategy:
+      matrix:
+        include:
+          - ruby-version: 2.7.2
+            rails-version: '~> 5.2.4'
+          - ruby-version: 2.7.2
+            rails-version: '~> 6.0.3'
+          - ruby-version: 2.7.2
+            rails-version: '~> 6.1.0'
+          - ruby-version: 3.0.0
+            rails-version: '~> 6.0.3'
+          - ruby-version: 3.0.0
+            rails-version: '~> 6.1.0'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.0
+        ruby-version: ${{ matrix.ruby-version }}
     - name: Run the default task
       run: |
         gem install bundler -v 2.2.0.rc.2
         bundle install
         bundle exec rake
+      env:
+        RAILS_VERSION: ${{ matrix.rails-version }}
