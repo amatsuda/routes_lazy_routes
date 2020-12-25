@@ -21,13 +21,5 @@ module RoutesLazyRoutes
         load "#{__dir__}/tasks/routes_lazy_routes.rake"
       end
     end
-
-    module EnvironmentLoader
-      def require_environment!
-        super
-
-        RoutesLazyRoutes.eager_load!
-      end
-    end
   end
 end

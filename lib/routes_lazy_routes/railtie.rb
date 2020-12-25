@@ -6,7 +6,11 @@ module RoutesLazyRoutes
   class Railtie < ::Rails::Railtie
     # Extending the following modules have to be done very early, like before executing any initializer, so here it is
     Rails::Application.prepend RoutesLazyRoutes::Application::TaskLoader
-    Rails::Command::RoutesCommand.prepend RoutesLazyRoutes::Application::EnvironmentLoader if defined? Rails::Command::RoutesCommand
+
+    if defined? Rails::Command::RoutesCommand
+      require_relative 'command/routes_command'
+      Rails::Command::RoutesCommand.prepend RoutesLazyRoutes::Command::RoutesCommand
+    end
 
     initializer :routes_lazy_routes, before: :add_routing_paths do
       RoutesLazyRoutes.arise!
