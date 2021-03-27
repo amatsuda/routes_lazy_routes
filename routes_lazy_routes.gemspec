@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'rails'
+  spec.add_dependency 'railties'
+  spec.add_dependency 'actionpack'
   spec.add_development_dependency 'byebug'
 end
