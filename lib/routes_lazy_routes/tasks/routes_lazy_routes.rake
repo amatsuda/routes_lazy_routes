@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-namespace :routes_lazy_routes do
-  task :eager_load do
-    RoutesLazyRoutes.eager_load!
+if Rake::Task.task_defined?('routes')
+  namespace :routes_lazy_routes do
+    task :eager_load do
+      RoutesLazyRoutes.eager_load!
+    end
   end
-end
 
-Rake::Task['routes'].enhance ['routes_lazy_routes:eager_load']
+  Rake::Task['routes'].enhance ['routes_lazy_routes:eager_load']
+end
