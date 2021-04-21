@@ -7,15 +7,15 @@ jobs:
     strategy:
       matrix:
         include:
-          - ruby-version: 2.7.2
+          - ruby-version: 2.7.3
             rails-version: '~> 5.2.4'
-          - ruby-version: 2.7.2
+          - ruby-version: 2.7.3
             rails-version: '~> 6.0.3'
-          - ruby-version: 2.7.2
+          - ruby-version: 2.7.3
             rails-version: '~> 6.1.0'
-          - ruby-version: 3.0.0
+          - ruby-version: 3.0.1
             rails-version: '~> 6.0.3'
-          - ruby-version: 3.0.0
+          - ruby-version: 3.0.1
             rails-version: '~> 6.1.0'
     runs-on: ubuntu-latest
     steps:
