@@ -44,6 +44,17 @@ If you're bundling this in the production server, it'd be a good idea to throw a
 
 - And, as already explained, sending a request to the Rails server automatically runs `RoutesLazyRoutes.eager_load!` on the server.
 
+- On the other hand, you need manually calling `RoutesLazyRoutes.eager_load!` inside your worker process (e.g. Sidekiq) to resolve named routes like the following:
+  ``` ruby
+  # config/initializers/sidekiq.rb
+  Sidekiq.configure_server do |config|
+    if defined?(RoutesLazyRoutes)
+      Rails.application.config.after_initialize do
+        RoutesLazyRoutes.eager_load!
+      end
+    end
+  end
+  ```
 
 ## Contributing
 
