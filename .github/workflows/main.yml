@@ -6,10 +6,14 @@ jobs:
   build:
     strategy:
       matrix:
-        ruby_version: ['3.0', '2.7', '2.6']
+        ruby_version: [ruby-head, '3.0', '2.7', '2.6']
         rails_version: ['edge', '6.1', '6.0', '5.2']
 
         exclude:
+          - ruby_version: ruby-head
+            rails_version: '6.0'
+          - ruby_version: ruby-head
+            rails_version: '5.2'
           - ruby_version: '3.0'
             rails_version: '5.2'
           - ruby_version: '2.6'
