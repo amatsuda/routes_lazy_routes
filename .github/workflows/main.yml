@@ -18,16 +18,15 @@ jobs:
           - ruby-version: 3.0.1
             rails-version: '~> 6.1.0'
     runs-on: ubuntu-latest
+
+    env:
+      RAILS_VERSION: ${{ matrix.rails_version }}
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-    - name: Run the default task
-      run: |
-        gem install bundler
-        bundle install
-        bundle exec rake
-      env:
-        RAILS_VERSION: ${{ matrix.rails-version }}
+
+    - run: bundle exec rake
