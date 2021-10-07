@@ -24,10 +24,8 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # 'bundle install' and cache
     - name: Run the default task
-      run: |
-        gem install bundler
-        bundle install
-        bundle exec rake
+      run: bundle exec rake
       env:
         RAILS_VERSION: ${{ matrix.rails-version }}
