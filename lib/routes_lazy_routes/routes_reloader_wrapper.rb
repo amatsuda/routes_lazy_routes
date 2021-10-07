@@ -2,7 +2,13 @@
 
 module RoutesLazyRoutes
   class RoutesReloaderWrapper
-    delegate :paths, :eager_load=, :updated?, :route_sets, :external_routes, to: :@original_routes_reloader
+    delegate :paths,
+             :eager_load=,
+             :run_after_load_paths=,
+             :updated?,
+             :route_sets,
+             :external_routes,
+             to: :@original_routes_reloader
 
     def initialize(original_routes_reloader)
       @original_routes_reloader = original_routes_reloader
