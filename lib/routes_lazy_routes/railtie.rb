@@ -23,5 +23,11 @@ module RoutesLazyRoutes
         RoutesLazyRoutes.eager_load!
       end
     end
+
+    console do
+      ActiveSupport.on_load(:action_mailer) do
+        before_action { RoutesLazyRoutes.eager_load! }
+      end
+    end
   end
 end
