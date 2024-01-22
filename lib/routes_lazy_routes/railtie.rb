@@ -8,8 +8,7 @@ module RoutesLazyRoutes
     Rails::Application.prepend RoutesLazyRoutes::Application::TaskLoader
 
     if defined? Rails::Command::RoutesCommand
-      require_relative 'command/routes_command'
-      Rails::Command::RoutesCommand.prepend RoutesLazyRoutes::Command::RoutesCommand
+      Rails::Application.prepend RoutesLazyRoutes::Application::RoutesCommandEagerLoader
     end
 
     initializer :routes_lazy_routes, before: :add_routing_paths do
