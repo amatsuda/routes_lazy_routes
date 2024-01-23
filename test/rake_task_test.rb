@@ -9,7 +9,8 @@ class RakeTaskTest < Minitest::Test
   end
 
   def test_rails_routes_command_output
-    routes_output = `cd test && bin/rails routes`
+    rails_version = "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}"
+    routes_output = `cd test && RAILS_VERSION=#{rails_version} bin/rails routes`
     assert_match /^ *foo GET/, routes_output
   end
 end
