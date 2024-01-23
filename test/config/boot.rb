@@ -5,6 +5,6 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile", __dir__)
 require "bundler/setup"
 
 require "rails"
-require "rails/all"
+require "action_controller/railtie"
 
 # Bundler.require(*Rails.groups)
