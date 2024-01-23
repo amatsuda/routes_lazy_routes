@@ -7,4 +7,9 @@ class RakeTaskTest < Minitest::Test
     # Just testing that loading the rake task doesn't raise any error
     Rails.application.load_tasks
   end
+
+  def test_rails_routes_command_output
+    routes_output = `cd test && bin/rails routes`
+    assert_match /^ *foo GET/, routes_output
+  end
 end
