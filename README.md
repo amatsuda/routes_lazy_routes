@@ -40,7 +40,7 @@ If you're bundling this in the production server, it'd be a good idea to throw a
 
 - `Rails.application.eager_load!` automatically invokes `RoutesLazyRoutes.eager_load!` since that should be what we expect for `Rails.application.eager_load!`.
 
-- Loading an integration test automatically kicks `RoutesLazyRoutes.eager_load!` since AD::Integration expects the routes to be loaded.
+- Loading an integration test or controller test automatically kicks `RoutesLazyRoutes.eager_load!` since they expect the routes to be loaded.
 
 - And, as already explained, sending a request to the Rails server automatically runs `RoutesLazyRoutes.eager_load!` on the server.
 

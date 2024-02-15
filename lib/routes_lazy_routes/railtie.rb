@@ -21,6 +21,10 @@ module RoutesLazyRoutes
       ActiveSupport.on_load :action_dispatch_integration_test, run_once: true do
         RoutesLazyRoutes.eager_load!
       end
+
+      ActiveSupport.on_load :action_controller_test_case, run_once: true do
+        RoutesLazyRoutes.eager_load!
+      end
     end
   end
 end
