@@ -23,7 +23,7 @@ module RoutesLazyRoutes
     end
 
     # A monkey-patch that eager loads routes before the routes command is executed by prepending this module to the
-    # require_enviornment! method that's called when boot_application! is executed performing console commands.
+    # require_environment! method that's called when boot_application! is executed performing console commands.
     module RoutesCommandEagerLoader
       def require_environment!
         super
