@@ -4,10 +4,12 @@ require "test_helper"
 
 class RoutesLazyRoutesTest < Minitest::Test
   def test_it_lazily_loads_the_routes
-    assert_equal 0, Rails.application.routes.routes.length
+    app_routes = -> { Rails.application.routes.routes.reject(&:internal) }
+
+    assert_equal 0, app_routes.call.length
 
     RoutesLazyRoutes.eager_load!
 
-    assert_equal 1, Rails.application.routes.routes.length
+    assert_equal 1, app_routes.call.length
   end
 end
